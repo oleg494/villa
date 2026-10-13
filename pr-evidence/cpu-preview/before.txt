@@ -1,0 +1,21 @@
+<workspace>\villa\vesuvius\.venv\Lib\site-packages\torch\jit\_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+torch 2.14.1+cu130 cuda_available True
+umbilicus zyx torch.Size([100, 3]) cpu
+calling save_combined_preview on CPU (no mock)...
+REPRODUCED: RuntimeError Expected all tensors to be on the same device, but got tensors is on cuda:0, different from other tensors on cpu (when checking argument in method wrapper_CUDA_cat)
+Traceback (most recent call last):
+  File "<workspace>\tmp-cpuexportfix\repro_before.py", line 58, in <module>
+    manifest = spiral_helpers.save_combined_preview(
+        transform, dr_per_winding, [], [], out_dir, cfg,
+    ...<3 lines>...
+        z_direction_is_top_to_bottom=None,
+    )
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\torch\utils\_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "<workspace>\villa\spiral-fitting\spiral_helpers.py", line 1662, in save_combined_preview
+    spiral = torch.cat([
+        spiral_zs[:, None, None].expand(-1, yxs.shape[0], 1),
+        yxs[None, :, :].expand(spiral_zs.shape[0], -1, 2),
+    ], dim=-1)
+RuntimeError: Expected all tensors to be on the same device, but got tensors is on cuda:0, different from other tensors on cpu (when checking argument in method wrapper_CUDA_cat)

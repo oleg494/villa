@@ -1,0 +1,23 @@
+    Traceback (most recent call last):
+      File "<frozen runpy>", line 203, in _run_module_as_main
+      File "<frozen runpy>", line 88, in _run_code
+      File "<workspace>\villa\vesuvius\src\vesuvius\ink_detection\training\train.py", line 1299, in <module>
+        raise SystemExit(main())
+                         ~~~~^^
+      File "<workspace>\villa\vesuvius\src\vesuvius\ink_detection\training\train.py", line 1295, in main
+        return _run_training(request)
+      File "<workspace>\villa\vesuvius\src\vesuvius\ink_detection\training\train.py", line 458, in _run_training
+        shared_dataset = InkDataset(dataset_config, do_augmentations=False)
+      File "<workspace>\villa\vesuvius\src\vesuvius\ink_detection\data\dataset.py", line 151, in __init__
+        self.patches = self._discover_or_load_patches()
+                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+      File "<workspace>\villa\vesuvius\src\vesuvius\ink_detection\data\dataset.py", line 224, in _discover_or_load_patches
+        with ThreadPoolExecutor(
+             ~~~~~~~~~~~~~~~~~~^
+            max_workers=self.config.dataloader_workers
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        ) as executor:
+        ^
+      File "<python>/Lib/concurrent/futures/thread.py", line 183, in __init__
+        raise ValueError("max_workers must be greater than 0")
+    ValueError: max_workers must be greater than 0

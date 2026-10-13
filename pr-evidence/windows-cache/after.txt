@@ -1,0 +1,5 @@
+uncached reference: bytes=2752512 sha256=a4d80c8ac5b9ecc3e9ea74b51731c9c36b7ddf4e7cef55b390bed210cfce7a82
+attempt 1: ok
+attempt 2: ok
+attempt 3: ok
+FINAL: ALL BATCHES OK (0 failing batch(es) of 3)

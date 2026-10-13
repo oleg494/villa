@@ -1,0 +1,6 @@
+<workspace>\villa\vesuvius\.venv\Lib\site-packages\torch\jit\_script.py:1485: FutureWarning: `torch.jit.script` is not supported in Python 3.14+ and may break. Please switch to `torch.compile` or `torch.export`.
+  warnings.warn(
+torch 2.14.1+cu130 cuda_available True
+umbilicus zyx torch.Size([260, 3]) cpu
+calling save_combined_preview on CPU (no mock)...
+UNEXPECTED SUCCESS {'schema_version': 2, 'kind': 'spiral_combined_preview', 'surface_path': 'C:\\Users\\oleg2\\Desktop\\vesuvius\\tmp-cpuexportfix\\out\\preview_runec62aa1d\\surface', 'surface_id': 'surface', 'first_winding': 10, 'last_winding': 12, 'winding_column_ranges': [[0, 99], [99, 190], [190, 273]], 'winding_ids': [12, 11, 10], 'voxel_size_um': 2.399, 'grid_orientation': {'z_direction_is_top_to_bottom': None}, 'manifest_path': 'C:\\Users\\oleg2\\Desktop\\vesuvius\\tmp-cpuexportfix\\out\\preview_runec62aa1d\\manifest.json'}

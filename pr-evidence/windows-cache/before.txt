@@ -1,0 +1,75 @@
+uncached reference sha256=a4d80c8ac5b9ecc3e9ea74b51731c9c36b7ddf4e7cef55b390bed210cfce7a82
+attempt 1: ok
+--- worker 2 ---
+Traceback (most recent call last):
+  File "<workspace>\tmp_before_rerun\before_rerun.py", line 49, in _worker
+    volume = module.open_volume(str(SOURCE), 0, cache_dir=str(cache_dir))
+  File "<workspace>\tmp_before_rerun_volume_io.py", line 208, in open_volume
+    return select_volume_level(
+        root,
+    ...<2 lines>...
+        root_array_is_requested_level=root_array_is_requested_level,
+    )
+  File "<workspace>\tmp_before_rerun_volume_io.py", line 176, in select_volume_level
+    return root[str(resolution)]
+           ~~~~^^^^^^^^^^^^^^^^^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\group.py", line 2051, in __getitem__
+    obj = self._sync(self._async_group.getitem(path))
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\sync.py", line 201, in _sync
+    return sync(
+        coroutine,
+        timeout=config.get("async.timeout"),
+    )
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\sync.py", line 155, in sync
+    raise return_result
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\sync.py", line 116, in _runner
+    return await coro
+           ^^^^^^^^^^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\group.py", line 792, in getitem
+    return await get_node(
+           ^^^^^^^^^^^^^^^
+        store=store_path.store, path=store_path.path, zarr_format=self.metadata.zarr_format
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\group.py", line 3884, in get_node
+    return await _get_node_v2(store=store, path=path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\group.py", line 3841, in _get_node_v2
+    metadata = await _read_metadata_v2(store=store, path=path)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\core\group.py", line 3710, in _read_metadata_v2
+    zarray_bytes, zgroup_bytes, zattrs_bytes = await asyncio.gather(
+                                               ^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\experimental\cache_store.py", line 369, in get
+    return await self._get_try_cache(key, prototype, byte_range)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\experimental\cache_store.py", line 301, in _get_try_cache
+    maybe_cached = await self._cache.get(key, prototype)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\storage\_local.py", line 357, in get
+    return await asyncio.to_thread(_get, path, prototype, byte_range)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oleg2\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\asyncio\threads.py", line 26, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oleg2\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\concurrent\futures\thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "C:\Users\oleg2\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\concurrent\futures\thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "<workspace>\villa\vesuvius\.venv\Lib\site-packages\zarr\storage\_local.py", line 33, in _get
+    return prototype.buffer.from_bytes(path.read_bytes())
+                                       ~~~~~~~~~~~~~~~^^
+  File "C:\Users\oleg2\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py", line 777, in read_bytes
+    with self.open(mode='rb', buffering=0) as f:
+         ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\oleg2\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py", line 771, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 13] Permission denied: 'C:\\Users\\oleg2\\Desktop\\vesuvius\\tmp_before_rerun\\before_cache_2\\3d81b416bb7e\\0\\.zarray'
+
+attempt 2: FAILURE
+BEFORE-FIX FINAL: FAILURE REPRODUCED
